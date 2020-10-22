@@ -1,0 +1,22 @@
+{
+  "name": "jsx-test-renderer",
+  "version": "1.0.0",
+  "description": "Create unit tests for React components with JSX language",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kneczaj/jsx-test-renderer.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Kamil Neczaj <kneczajdev@gmail.com> (https://www.linkedin.com/in/kamil-neczaj-750a2383/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kneczaj/jsx-test-renderer/issues"
+  },
+  "homepage": "https://github.com/kneczaj/jsx-test-renderer#readme"
+}
