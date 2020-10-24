@@ -31,11 +31,11 @@ export interface PropsBase<TProps = any, TestsNames extends string = string> {
    */
   expectedResults?: ExpectedResults<TestsNames>;
   children?: (props: TProps) => React.ReactElement;
-  beforeAll?: () => void | Promise<void>;
-  afterAll?: () => void | Promise<void>;
-  beforeEach?: () => void | Promise<void>;
+  beforeAll?: (rendered: RenderResult) => void | Promise<void>;
+  afterAll?: (rendered: RenderResult) => void | Promise<void>;
+  beforeEach?: (rendered: RenderResult) => void | Promise<void>;
   beforeEachRender?: () => void | Promise<void>;
-  afterEach?: () => void | Promise<void>;
+  afterEach?: (rendered: RenderResult) => void | Promise<void>;
 }
 
 export interface Props<TProps = any, TestsNames extends string = string> extends PropsBase<TProps, TestsNames> {
@@ -45,7 +45,7 @@ export interface Props<TProps = any, TestsNames extends string = string> extends
 
 export function TestBase<TTestNames extends string, TProps>({
   children,
-  component,
+  component: Component,
   expectedResults,
   label,
   props,
@@ -63,13 +63,13 @@ export function TestBase<TTestNames extends string, TProps>({
     beforeEach(() => {
       beforeEachRenderHandler && beforeEachRenderHandler();
       cleanup();
-      rendered = render(component(props));
-      beforeEachHandler && beforeEachHandler();
+      rendered = render(<Component {...props}/>);
+      beforeEachHandler && beforeEachHandler(rendered);
     });
 
-    afterEachHandler && afterEach(afterEachHandler);
-    afterAllHandler && afterAll(afterAllHandler);
-    beforeAllHandler && beforeAll(beforeAllHandler);
+    afterEachHandler && afterEach(() => afterEachHandler(rendered));
+    afterAllHandler && afterAll(() => afterAllHandler(rendered));
+    beforeAllHandler && beforeAll(() => beforeAllHandler(rendered));
 
     if (!isUndefined(expectedResults)) {
       (Object.keys(expectedResults) as TTestNames[]).forEach(testLabel => {

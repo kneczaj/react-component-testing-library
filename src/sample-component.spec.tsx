@@ -2,8 +2,9 @@ import React from "react";
 import { makeTestSuite, PropsBase, runTests, TestBase } from "./jsx-test";
 import { Props, SampleComponent } from "./sample-component";
 import '@testing-library/jest-dom/extend-expect';
+import { fireEvent } from '@testing-library/react';
 
-type TestNames = 'shows A' | 'shows B' | 'shows C';
+type TestNames = 'shows A' | 'shows B' | 'shows C' | 'shows D' | 'shows button';
 
 const tests = makeTestSuite(it => {
   it('shows A', ({ queryByText }, props, expect) => {
@@ -14,6 +15,12 @@ const tests = makeTestSuite(it => {
   });
   it('shows C', ({ queryByText }, props, expect) => {
     expect(queryByText('C')).toBeInTheDocument();
+  });
+  it('shows button', ({ queryByText, queryByRole }, props, expect) => {
+    expect(queryByRole('button', { name: 'show D' })).toBeInTheDocument();
+  });
+  it('shows D', ({ queryByText }, props, expect) => {
+    expect(queryByText('D')).toBeInTheDocument();
   });
 })
 
@@ -41,9 +48,26 @@ runTests(
       expectedResults={{
         "shows A": false,
         "shows B": false,
-        "shows C": true
+        "shows C": true,
+        "shows D": false,
+        "shows button": true
       }}
-    />
+    >{props =>
+      <Test
+        label={'after clicking the button'}
+        props={props}
+        beforeEach={({ getByRole }) => {
+          fireEvent.click(getByRole('button', { name: 'show D' }));
+        }}
+        expectedResults={{
+          "shows A": false,
+          "shows B": false,
+          "shows C": false,
+          "shows D": true,
+          "shows button": true
+        }}
+      />
+    }</Test>
     <Test
       label={'with B set'}
       props={{
@@ -53,7 +77,9 @@ runTests(
       expectedResults={{
         "shows A": false,
         "shows B": true,
-        "shows C": false
+        "shows C": false,
+        "shows D": false,
+        "shows button": false
       }}
     />
     <Test
@@ -65,7 +91,9 @@ runTests(
       expectedResults={{
         "shows A": true,
         "shows B": false,
-        "shows C": false
+        "shows C": false,
+        "shows D": false,
+        "shows button": false
       }}
     />
   </>}</Test>
