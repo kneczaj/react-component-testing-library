@@ -8,7 +8,10 @@ type Expect = (expectation: any) => any;
 type TestFn<TProps> = (
   rendered: RenderResult,
   props: TProps,
-  expect: Expect
+  /**
+   * this expect will work as expect.not if the test is required to fail
+   */
+  expectResult: Expect
 ) => void | Promise<void>;
 
 interface Test<TProps> {

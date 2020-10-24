@@ -7,20 +7,20 @@ import { fireEvent } from '@testing-library/react';
 type TestNames = 'shows A' | 'shows B' | 'shows C' | 'shows D' | 'shows button';
 
 const tests = makeTestSuite(it => {
-  it('shows A', ({ queryByText }, props, expect) => {
-    expect(queryByText('A')).toBeInTheDocument();
+  it('shows A', ({ queryByText }, props, expectResult) => {
+    expectResult(queryByText('A')).toBeInTheDocument();
   });
-  it('shows B', ({ queryByText }, props, expect) => {
-    expect(queryByText('B')).toBeInTheDocument();
+  it('shows B', ({ queryByText }, props, expectResult) => {
+    expectResult(queryByText('B')).toBeInTheDocument();
   });
-  it('shows C', ({ queryByText }, props, expect) => {
-    expect(queryByText('C')).toBeInTheDocument();
+  it('shows C', ({ queryByText }, props, expectResult) => {
+    expectResult(queryByText('C')).toBeInTheDocument();
   });
-  it('shows button', ({ queryByText, queryByRole }, props, expect) => {
-    expect(queryByRole('button', { name: 'show D' })).toBeInTheDocument();
+  it('shows button', ({ queryByText, queryByRole }, props, expectResult) => {
+    expectResult(queryByRole('button', { name: 'show D' })).toBeInTheDocument();
   });
-  it('shows D', ({ queryByText }, props, expect) => {
-    expect(queryByText('D')).toBeInTheDocument();
+  it('shows D', ({ queryByText }, props, expectResult) => {
+    expectResult(queryByText('D')).toBeInTheDocument();
   });
 })
 
