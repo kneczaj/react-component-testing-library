@@ -2,17 +2,26 @@
   "name": "react-component-testing-library",
   "version": "1.0.0",
   "description": "Create unit tests for React components with JSX language",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kneczaj/react-component-testing-library.git"
   },
   "keywords": [
-    "react"
+    "react",
+    "testing",
+    "jsx",
+    "component testing",
+    "unit testing",
+    "ui",
+    "dom"
   ],
   "author": "Kamil Neczaj <kneczajdev@gmail.com> (https://www.linkedin.com/in/kamil-neczaj-750a2383/)",
   "license": "MIT",
