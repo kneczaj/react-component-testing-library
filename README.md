@@ -21,4 +21,4 @@ Taking the upper into consideration this library has been created. With is you m
 your React components and check each of them them against a bunch of repeating tests expecting pass or fail for each of
 them.
 
-See `sample-component.spec.tsx` for details.
+See `src/example/sample-component.spec.tsx` for details.
