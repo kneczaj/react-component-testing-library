@@ -25,7 +25,8 @@
     ],
     "types": [
       "jest"
-    ]
+    ],
+    "outDir": "./lib"
   },
   "include": [
     "src"
