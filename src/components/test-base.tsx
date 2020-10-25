@@ -1,8 +1,8 @@
 import React from "react";
 import { cleanup, render, RenderResult } from "@testing-library/react";
-import { isUndefined } from "../utils";
+import { expectNot, isUndefined } from "../utils";
 import ReactDOM from "react-dom/server";
-import { ExpectedResults, expectNot, Tests } from "../index";
+import { ExpectedResults, Tests } from "../models";
 
 export interface PropsBase<TProps = any, TestsNames extends string = string> {
   label: string;
