@@ -1,9 +1,9 @@
 import React from "react";
-import { makeTestSuite, runTests } from "./jsx-test";
+import { makeTestSuite, runTests } from "../jsx-test";
 import { Props, SampleComponent } from "./sample-component";
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent } from '@testing-library/react';
-import { PropsBase, TestBase } from "./test-base";
+import { PropsBase, TestBase } from "../components/test-base";
 
 type TestNames = 'shows A' | 'shows B' | 'shows C' | 'shows D' | 'shows button';
 
