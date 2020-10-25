@@ -3,6 +3,7 @@
     "baseUrl": "src",
     "target": "es5",
     "allowJs": true,
+    "declaration": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,7 +14,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react",
     "lib": [
       "DOM",
@@ -25,9 +25,14 @@
     ],
     "types": [
       "jest"
-    ]
+    ],
+    "outDir": "./lib"
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/example"
   ]
 }

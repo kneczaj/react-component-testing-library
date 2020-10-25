@@ -1,5 +1,5 @@
 import React from "react";
-import { makeTestSuite, runTests } from "../jsx-test";
+import { makeTestSuite, runTests } from "../index";
 import { Props, SampleComponent } from "./sample-component";
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent } from '@testing-library/react';
