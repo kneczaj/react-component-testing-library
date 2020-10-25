@@ -25,13 +25,13 @@
     ],
     "types": [
       "jest"
-    ]
+    ],
+    "outDir": "./lib"
   },
   "include": [
-    "src"
+    "src/example"
   ],
   "exclude": [
-    "node_modules",
-    "src/example"
+    "node_modules"
   ]
 }
