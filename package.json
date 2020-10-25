@@ -1,5 +1,5 @@
 {
-  "name": "jsx-test-renderer",
+  "name": "react-component-testing-library",
   "version": "1.0.0",
   "description": "Create unit tests for React components with JSX language",
   "main": "index.js",
