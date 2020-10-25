@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kneczaj/jsx-test-renderer.git"
+    "url": "git+https://github.com/kneczaj/react-component-testing-library.git"
   },
   "keywords": [
     "react"
@@ -16,9 +16,9 @@
   "author": "Kamil Neczaj <kneczajdev@gmail.com> (https://www.linkedin.com/in/kamil-neczaj-750a2383/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kneczaj/jsx-test-renderer/issues"
+    "url": "https://github.com/kneczaj/react-component-testing-library/issues"
   },
-  "homepage": "https://github.com/kneczaj/jsx-test-renderer#readme",
+  "homepage": "https://github.com/kneczaj/react-component-testing-library#readme",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
