@@ -22,3 +22,9 @@ your React components and check each of them them against a bunch of repeating t
 them.
 
 See `src/example/sample-component.spec.tsx` for details.
+
+## How to use
+Follow the `example` code
+
+## How to try out
+Checkout the repo and run `yarn test`
