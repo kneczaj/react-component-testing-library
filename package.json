@@ -4,6 +4,10 @@
   "description": "Create unit tests for React components with JSX language",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/*.js",
+    "lib/*.d.ts"
+  ],
   "scripts": {
     "test": "jest --watch",
     "build": "tsc",
