@@ -23,3 +23,6 @@ export type It<TProps> = (
   name: string,
   test: TestFn<TProps>
 ) => void;
+
+export const yes = true;
+export const no = false;

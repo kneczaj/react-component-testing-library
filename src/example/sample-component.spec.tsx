@@ -1,9 +1,8 @@
 import React from "react";
-import { makeTestSuite, runTests } from "../index";
+import { makeTestSuite, runTests, yes, no, PropsBase, TestBase } from "../index";
 import { Props, SampleComponent } from "./sample-component";
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent } from '@testing-library/react';
-import { PropsBase, TestBase } from "../components/test-base";
 
 type TestNames = 'shows A' | 'shows B' | 'shows C' | 'shows D' | 'shows button';
 
@@ -43,11 +42,11 @@ runTests(
       b: false
     }}
     expectedResults={{
-      "shows A": false,
-      "shows B": false,
-      "shows C": true,
-      "shows D": false,
-      "shows button": true
+      "shows A": no,
+      "shows B": no,
+      "shows C": yes,
+      "shows D": no,
+      "shows button": yes
     }}
   >{(props, expectedResults) => <>
     <Test
@@ -63,8 +62,8 @@ runTests(
         }}
         expectedResults={{
           ...expectedResults,
-          "shows D": true,
-          "shows C": false,
+          "shows C": no,
+          "shows D": yes
         }}
       />
     }</Test>
@@ -76,22 +75,22 @@ runTests(
       }}
       expectedResults={{
         ...expectedResults,
-        "shows B": true,
-        "shows C": false,
-        "shows button": false
+        "shows B": yes,
+        "shows C": no,
+        "shows button": no
       }}
     />
     <Test
       label={'with A set'}
       props={{
         ...props,
-        a: true
+        a: yes
       }}
       expectedResults={{
         ...expectedResults,
-        "shows A": true,
-        "shows C": false,
-        "shows button": false
+        "shows A": yes,
+        "shows C": no,
+        "shows button": no
       }}
     />
   </>}</Test>
