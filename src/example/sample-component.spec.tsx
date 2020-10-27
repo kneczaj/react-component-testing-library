@@ -42,18 +42,19 @@ runTests(
       a: false,
       b: false
     }}
-  >{props => <>
+    expectedResults={{
+      "shows A": false,
+      "shows B": false,
+      "shows C": true,
+      "shows D": false,
+      "shows button": true
+    }}
+  >{(props, expectedResults) => <>
     <Test
       label={'with all false'}
       props={props}
-      expectedResults={{
-        "shows A": false,
-        "shows B": false,
-        "shows C": true,
-        "shows D": false,
-        "shows button": true
-      }}
-    >{props =>
+      expectedResults={expectedResults}
+    >{(props, expectedResults) =>
       <Test
         label={'after clicking the button'}
         props={props}
@@ -61,11 +62,9 @@ runTests(
           fireEvent.click(getByRole('button', { name: 'show D' }));
         }}
         expectedResults={{
-          "shows A": false,
-          "shows B": false,
-          "shows C": false,
+          ...expectedResults,
           "shows D": true,
-          "shows button": true
+          "shows C": false,
         }}
       />
     }</Test>
@@ -76,10 +75,9 @@ runTests(
         b: true
       }}
       expectedResults={{
-        "shows A": false,
+        ...expectedResults,
         "shows B": true,
         "shows C": false,
-        "shows D": false,
         "shows button": false
       }}
     />
@@ -90,10 +88,9 @@ runTests(
         a: true
       }}
       expectedResults={{
+        ...expectedResults,
         "shows A": true,
-        "shows B": false,
         "shows C": false,
-        "shows D": false,
         "shows button": false
       }}
     />

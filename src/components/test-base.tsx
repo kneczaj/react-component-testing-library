@@ -10,8 +10,14 @@ export interface PropsBase<TProps = any, TestsNames extends string = string> {
   /**
    * no tests will be run if undefined, but describe label will be shown and the props passed too
    */
-  expectedResults?: ExpectedResults<TestsNames>;
-  children?: (props: TProps) => React.ReactElement;
+  expectedResults?: Partial<ExpectedResults<TestsNames>>;
+  /**
+   * Pass props and expectedResults of this test to children so they can modify them instead of building from scratch.
+   * TODO: this would work much better with React Context. Please fill a PR if you want to help implementing! :)
+   * @param props
+   * @param expectedResults
+   */
+  children?: (props: TProps, expectedResults: Partial<ExpectedResults<TestsNames>>) => React.ReactElement;
   beforeAll?: (rendered: RenderResult) => void | Promise<void>;
   afterAll?: (rendered: RenderResult) => void | Promise<void>;
   beforeEach?: (rendered: RenderResult) => void | Promise<void>;
@@ -64,7 +70,9 @@ export function TestBase<TTestNames extends string, TProps>({
       return;
     }
 
-    ReactDOM.renderToString(children(props));
+    // TODO: this is a kind of hack to "render" the children in the situation when component returns null
+    // TODO: this can be done right with a custom renderer
+    ReactDOM.renderToString(children(props, expectedResults || {}));
   });
 
   return null;
