@@ -21,7 +21,7 @@ const tests = makeTestSuite(it => {
   it('shows C', ({ queryByText }, props, expectResult) => {
     expectResult(queryByText('C')).toBeInTheDocument();
   });
-  it('shows button', ({ queryByText, queryByRole }, props, expectResult) => {
+  it('shows button', ({ queryByRole }, props, expectResult) => {
     expectResult(queryByRole('button', { name: 'show D' })).toBeInTheDocument();
   });
   it('shows D', ({ queryByText }, props, expectResult) => {
