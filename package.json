@@ -6,7 +6,9 @@
   "types": "lib/index.d.ts",
   "files": [
     "lib/*.js",
-    "lib/*.d.ts"
+    "lib/*.d.ts",
+    "lib/components/*.js",
+    "lib/components/*.d.ts"
   ],
   "scripts": {
     "test": "jest --watch",
