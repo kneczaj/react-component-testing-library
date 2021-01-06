@@ -7,8 +7,11 @@ export function isUndefined(val: any): val is undefined {
   return val === undefined;
 }
 
-export function expectNot(expectation: any): any {
-  return expect(expectation).not;
+export function expectNot(expectation: any): jest.Expect & jest.AndNot<any> {
+  return {
+    ...expect(expectation).not,
+    not: expect(expectation)
+  };
 }
 
 export function makeTestSuite<TTestNames extends string, TProps>(tests: (it: It<TProps>) => void): Tests<TTestNames, TProps> {

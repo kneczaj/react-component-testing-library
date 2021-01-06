@@ -8,7 +8,7 @@ JS are welcome to be reported.
 ### Write tests with @testing-library/react
 `expectResult` is either `expect` or `expect.not` depending on the component state used later. In this way you can use
 such test to e.g. check if some value is hidden in all the situations it should not be visible. Still `expect` is
-available if you need it. You cannot use `expectResult(...).not` - at least in the current version.
+available if you need it.
 
 ```typescript
 const tests = makeTestSuite(it => {
