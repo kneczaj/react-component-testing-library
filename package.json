@@ -12,9 +12,10 @@
   ],
   "scripts": {
     "test": "jest --watch",
+    "test:once": "jest",
     "build": "tsc",
     "prepare": "yarn build",
-    "prepublishOnly": "yarn test"
+    "prepublishOnly": "yarn test:once"
   },
   "repository": {
     "type": "git",
