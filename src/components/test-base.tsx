@@ -1,6 +1,6 @@
 import React from "react";
 import { cleanup, render, RenderResult } from "@testing-library/react";
-import { expectNot, isUndefined } from "../utils";
+import { asyncRenderWithAct, expectNot, isUndefined } from "../utils";
 import ReactDOM from "react-dom/server";
 import { ExpectedResults, Tests } from "../models";
 
@@ -47,22 +47,22 @@ export function TestBase<TTestNames extends string, TProps>({
     let rendered: RenderResult;
     const getRendered = () => rendered;
 
-    beforeEach(() => {
-      beforeEachRenderHandler && beforeEachRenderHandler();
+    beforeEach(async () => {
+      beforeEachRenderHandler && await beforeEachRenderHandler();
       cleanup();
-      rendered = render(<Component {...props}/>);
-      beforeEachHandler && beforeEachHandler(rendered, props);
+      rendered = await asyncRenderWithAct(<Component {...props}/>);
+      beforeEachHandler && await beforeEachHandler(rendered, props);
     });
 
-    afterEachHandler && afterEach(() => afterEachHandler(rendered, props));
-    afterAllHandler && afterAll(() => afterAllHandler(rendered, props));
-    beforeAllHandler && beforeAll(() => beforeAllHandler(rendered, props));
+    afterEachHandler && afterEach(async () => await afterEachHandler(rendered, props));
+    afterAllHandler && afterAll(async () => await afterAllHandler(rendered, props));
+    beforeAllHandler && beforeAll(async () => await beforeAllHandler(rendered, props));
 
     if (!isUndefined(expectedResults)) {
       (Object.keys(expectedResults) as TTestNames[]).forEach(testLabel => {
         const label = expectedResults[testLabel] ? testLabel : `fails ${testLabel}`;
         const expectFn = expectedResults[testLabel] ? expect : expectNot;
-        it(label, () => tests[testLabel].fn(getRendered(), props, expectFn));
+        it(label, async () => await tests[testLabel].fn(getRendered(), props, expectFn));
       });
     }
 
