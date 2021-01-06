@@ -13,8 +13,8 @@
   "scripts": {
     "test": "jest --watch",
     "build": "tsc",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test"
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test"
   },
   "repository": {
     "type": "git",
