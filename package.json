@@ -17,7 +17,8 @@
     "prepare": "yarn build",
     "prepublishOnly": "yarn test:once",
     "gadd": "scripts/add.sh",
-    "gremove": "scripts/remove.sh"
+    "gremove": "scripts/remove.sh",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}' --fix --quiet"
   },
   "repository": {
     "type": "git",
@@ -65,6 +66,5 @@
     "jest": ">= 26 < 27",
     "react": ">= 16 < 18",
     "react-dom": ">= 16 < 18"
-  },
-  "type": "module"
+  }
 }
