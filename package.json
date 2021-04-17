@@ -15,7 +15,9 @@
     "test:once": "jest",
     "build": "tsc",
     "prepare": "yarn build",
-    "prepublishOnly": "yarn test:once"
+    "prepublishOnly": "yarn test:once",
+    "gadd": "scripts/add.sh",
+    "gremove": "scripts/remove.sh"
   },
   "repository": {
     "type": "git",
