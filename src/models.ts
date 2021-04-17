@@ -1,4 +1,4 @@
-import { RenderResult } from "@testing-library/react";
+import { RenderResult } from '@testing-library/react';
 
 export type Expect = (expectation: any) => any;
 
@@ -16,13 +16,14 @@ export interface Test<TProps> {
   fn: TestFn<TProps>;
 }
 
-export type ExpectedResults<TTestNames extends string> = { [key in TTestNames]: boolean };
-export type Tests<TTestNames extends string, TProps> = { [key in TTestNames]: Test<TProps> };
+export type ExpectedResults<TTestNames extends string> = {
+  [key in TTestNames]: boolean;
+};
+export type Tests<TTestNames extends string, TProps> = {
+  [key in TTestNames]: Test<TProps>;
+};
 
-export type It<TProps> = (
-  name: string,
-  test: TestFn<TProps>
-) => void;
+export type It<TProps> = (name: string, test: TestFn<TProps>) => void;
 
 export const yes = true;
 export const no = false;

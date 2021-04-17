@@ -1,7 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom/server";
-import { It, TestFn, Tests } from "./models";
-import { act, render, RenderOptions, RenderResult } from "@testing-library/react";
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import { It, TestFn, Tests } from './models';
+import {
+  act,
+  render,
+  RenderOptions,
+  RenderResult
+} from '@testing-library/react';
 
 export function isUndefined(val: any): val is undefined {
   return val === undefined;
@@ -14,8 +19,10 @@ export function expectNot(expectation: any): jest.Expect & jest.AndNot<any> {
   };
 }
 
-export function makeTestSuite<TTestNames extends string, TProps>(tests: (it: It<TProps>) => void): Tests<TTestNames, TProps> {
-  const result = new class {
+export function makeTestSuite<TTestNames extends string, TProps>(
+  tests: (it: It<TProps>) => void
+): Tests<TTestNames, TProps> {
+  const result = new (class {
     tests: Tests<TTestNames, TProps> = {} as Tests<TTestNames, TProps>;
     itWrapper(name: string, test: TestFn<TProps>) {
       this.tests = {
@@ -24,9 +31,9 @@ export function makeTestSuite<TTestNames extends string, TProps>(tests: (it: It<
           name,
           fn: test
         }
-      }
+      };
     }
-  }
+  })();
   tests(result.itWrapper.bind(result));
   return result.tests;
 }

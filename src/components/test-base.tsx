@@ -1,8 +1,8 @@
-import React from "react";
-import { cleanup, render, RenderResult } from "@testing-library/react";
-import { asyncRenderWithAct, expectNot, isUndefined } from "../utils";
-import ReactDOM from "react-dom/server";
-import { ExpectedResults, Tests } from "../models";
+import React from 'react';
+import { cleanup, render, RenderResult } from '@testing-library/react';
+import { asyncRenderWithAct, expectNot, isUndefined } from '../utils';
+import ReactDOM from 'react-dom/server';
+import { ExpectedResults, Tests } from '../models';
 
 export interface PropsBase<TProps = any, TestsNames extends string = string> {
   label: string;
@@ -17,7 +17,10 @@ export interface PropsBase<TProps = any, TestsNames extends string = string> {
    * @param props
    * @param expectedResults
    */
-  children?: (props: TProps, expectedResults: Partial<ExpectedResults<TestsNames>>) => React.ReactElement;
+  children?: (
+    props: TProps,
+    expectedResults: Partial<ExpectedResults<TestsNames>>
+  ) => React.ReactElement;
   beforeAll?: (rendered: RenderResult, props: TProps) => void | Promise<void>;
   afterAll?: (rendered: RenderResult, props: TProps) => void | Promise<void>;
   beforeEach?: (rendered: RenderResult, props: TProps) => void | Promise<void>;
@@ -25,7 +28,8 @@ export interface PropsBase<TProps = any, TestsNames extends string = string> {
   afterEach?: (rendered: RenderResult, props: TProps) => void | Promise<void>;
 }
 
-export interface Props<TProps = any, TestsNames extends string = string> extends PropsBase<TProps, TestsNames> {
+export interface Props<TProps = any, TestsNames extends string = string>
+  extends PropsBase<TProps, TestsNames> {
   component: (props: TProps) => JSX.Element;
   tests: Tests<TestsNames, TProps>;
 }
@@ -48,21 +52,29 @@ export function TestBase<TTestNames extends string, TProps>({
     const getRendered = () => rendered;
 
     beforeEach(async () => {
-      beforeEachRenderHandler && await beforeEachRenderHandler();
+      beforeEachRenderHandler && (await beforeEachRenderHandler());
       cleanup();
-      rendered = await asyncRenderWithAct(<Component {...props}/>);
-      beforeEachHandler && await beforeEachHandler(rendered, props);
+      rendered = await asyncRenderWithAct(<Component {...props} />);
+      beforeEachHandler && (await beforeEachHandler(rendered, props));
     });
 
-    afterEachHandler && afterEach(async () => await afterEachHandler(rendered, props));
-    afterAllHandler && afterAll(async () => await afterAllHandler(rendered, props));
-    beforeAllHandler && beforeAll(async () => await beforeAllHandler(rendered, props));
+    afterEachHandler &&
+      afterEach(async () => await afterEachHandler(rendered, props));
+    afterAllHandler &&
+      afterAll(async () => await afterAllHandler(rendered, props));
+    beforeAllHandler &&
+      beforeAll(async () => await beforeAllHandler(rendered, props));
 
     if (!isUndefined(expectedResults)) {
       (Object.keys(expectedResults) as TTestNames[]).forEach(testLabel => {
-        const label = expectedResults[testLabel] ? testLabel : `fails ${testLabel}`;
+        const label = expectedResults[testLabel]
+          ? testLabel
+          : `fails ${testLabel}`;
         const expectFn = expectedResults[testLabel] ? expect : expectNot;
-        it(label, async () => await tests[testLabel].fn(getRendered(), props, expectFn));
+        it(
+          label,
+          async () => await tests[testLabel].fn(getRendered(), props, expectFn)
+        );
       });
     }
 
